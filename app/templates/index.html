@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<body>
+    <div id="pageintro" class="hoc clear">
+      <article>
+        <p>Welcome to Pitch.</p>
+        <footer>
+            {%if current_user.is_authenticated %}
+
+          <ul class="nospace inline pushright">
+            <li><a class="btn" href="/post">See Pitches</a></li>
+            <li><a class="btn" href="/post/{{current_user.id}}">My Pitches</a></li>
+
+            {% else%}</ul>
+            <ul class="nospace inline pushright">
+                <li><a type="button" name="button" class=bg-success  href="/post">Go To Pitches</a></li>
+
+            <li><a type="button" name="button" class=bg-success href="{{url_for('auth.register')}}">Join pitch</a></li>
+          </ul>{%endif %}
+        </footer>
+      </article>
+    </div>
+</body>
+
+
+{% endblock %}

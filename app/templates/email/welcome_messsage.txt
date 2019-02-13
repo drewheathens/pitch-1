@@ -1,0 +1,7 @@
+Hello {{user.username}}
+Welcome to Pitch_time
+We have just seen you have signed up for our application and want to welcome you to pitch community.
+Pitch_time wishes you a great experience.
+
+Sincere Gratitude
+Pitch_time Team
