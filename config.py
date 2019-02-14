@@ -1,7 +1,6 @@
 import os
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://evans:meme@localhost/pitch'
     SECRET_KEY=os.environ.get('SECRET_KEY') or '1234'
     MAIL_SERVER ='smtp.googlemail.com'
     MAIL_PORT = 587
@@ -28,4 +27,3 @@ config_options = {
 'test':TestConfig
 
 }
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://evans:meme@localhost/pitch'
