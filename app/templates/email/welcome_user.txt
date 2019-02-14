@@ -1,7 +1,7 @@
 Hello {{user.username}}
-Welcome to OneMinutePitch
+Welcome to Pitch_team
 We have just seen you have signed up for our application and want to welcome you to the family.
 Please enjoy the reviews of all your  favourite pitches.
 
 Regards
-OneMinutePitch Team
+Pitch_team Team

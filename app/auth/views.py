@@ -8,8 +8,7 @@ from app import db
 from datetime import datetime
 from app.email import *
 from ..email import mail_message
-
-##################Registration route section#############
+#Registration route section
 @auth.route('/register', methods = ['GET','POST'])
 def register():
     if current_user.is_authenticated:
@@ -29,19 +28,19 @@ def register():
 
     '''
     first I ensure that the user that invokes this route is
-    not logged in. Logic inside if validate_on_submit() creates a 
+    not logged in. Logic inside if validate_on_submit() creates a
     new user with the username, email and password provide, writes it to the db
     and then redirects to the login prompt so that the user can ogin
 
 
     '''
-##################End Registration route section#############
+#End Registration route section
 
 
 
 
 
-############Log in section##############
+#Log in section
 '''
 The user log in is facilitated by Flask-Login's login_user() function, the value
 of the next query string argument is obtained. Flask provides a request variable that
@@ -67,7 +66,7 @@ def login():
         return redirect(next_page)
     return render_template('auth/login.html', title='Sig In', form = form)
     '''
-    First step is to load the user from the db,then query 
+    First step is to load the user from the db,then query
     the db with the log in username to find the user.
     the result of filetr_by is a query that only
     includes the objects that have a matching username
@@ -80,7 +79,7 @@ def login():
     Also I call the check_password() method to determine if the password entered in the form matches the hash or not
 
     '''
-############End Log in section##############
+#End Log in section
 
 
 @auth.route('/logout')
@@ -91,9 +90,9 @@ def logout():
     '''
     offers users the option to log out of the application
     '''
-###############Log out route end##############
+#Log out route end
 
-###############User_profile route end##############
+#User_profile route end
 
 @auth.route('/user/<username>')
 @login_required
@@ -107,7 +106,7 @@ def user_profile(username):
     return render_template('profile/user_profile.html',posts=posts, user=user)
     '''
     i have used a variant of first() called fist_or_404()
-    which works exactly like first() when there are results, and in case there 
+    which works exactly like first() when there are results, and in case there
     are no results it auto sends a 404 error back
     '''
 
@@ -124,47 +123,8 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data  = current_user.username
         form.about_me.data = current_user.bio
-        
+
     return render_template('profile/edit_profile.html', title='Edit Profile', form=form)
     '''
     If validate_on_submit() returns True the data is copied from the form into the user object and then writen the object to the database.
     '''
-
-    ###############End user profile route##############
-
-
-# @auth.route('/reset_password_request', methods=['GET', 'POST'])
-# def reset_password_request():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('main.index'))
-#     form = ResetPasswordRequestForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(email=form.email.data).first()
-#         if user:
-#             send_password_reset_email(user)
-#         flash('Check your email for the instructions to reset your password')
-#         return redirect(url_for('auth.login'))
-    
-#     return render_template('email/reset_password_request.html',title='Reset Password', form=form)
-#     '''
-#     first, i make sure the user is not logged in,when the form is submitted and valid, i look up the user email provided in the form 
-#     ,if the user is found, a password reset email will be sent using
-#     send_password_reset_email()
-#     '''
-
-    #########Rsetting password######
-
-# @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
-# def reset_password(token):
-#     if current_user.is_authenticated:
-#         return redirect(url_for('main.index'))
-#     user = User.verify_reset_password_token(token)
-#     if not user:
-#         return redirect(url_for('main.index'))
-#     form = ResetPasswordForm()
-#     if form.validate_on_submit():
-#         user.set_password(form.password.data)
-#         db.session.commit()
-#         flash('Your password has been reset.')
-#         return redirect(url_for('auth.login'))
-#     return render_template('email/reset_paword.html', form=form)
