@@ -14,10 +14,10 @@
             <li><a class="btn" href="/post/{{current_user.id}}">My Pitches</a></li>
 
             {% else%}</ul>
-            <ul class="nospace inline pushright">
-                <li><a type="button" name="button" class=bg-success  href="/post">Go To Pitches</a></li>
+            <ul>
+                <li><a class="btn"  href="/post">Go To Pitches</a></li>
 
-            <li><a type="button" name="button" class=bg-success href="{{url_for('auth.register')}}">Join pitch</a></li>
+            <li><a class="btn" href="{{url_for('auth.register')}}">Join pitch</a></li>
           </ul>{%endif %}
         </footer>
       </article>
