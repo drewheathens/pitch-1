@@ -13,14 +13,14 @@ from ..email import mail_message
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
-    form = RegistrationForm()
+    form = Registration()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Registration successfull!')
-        mail_message("Welcome to watchlist","email/welcome_user",user.email,user=user)
+        mail_message("Welcome to pitch","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Register', form=form)
@@ -34,15 +34,15 @@ def register():
 
 
     '''
-#End Registration route section
+#End Registration route
 
 
 
 
 
-#Log in section
+#Log in
 '''
-The user log in is facilitated by Flask-Login's login_user() function, the value
+Flask-Login's login_user() function, the value
 of the next query string argument is obtained. Flask provides a request variable that
 contains all the info that the client sent with the request.
 request.args attribute exposes the contents of the query string in a friendly dictionary format
@@ -53,7 +53,7 @@ request.args attribute exposes the contents of the query string in a friendly di
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
-    form = LoginForm()
+    form = Login()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
@@ -64,7 +64,7 @@ def login():
         if not next_page or url_parse(next_page).netloc!= '':
             next_page = url_for('main.index')
         return redirect(next_page)
-    return render_template('auth/login.html', title='Sig In', form = form)
+    return render_template('auth/login.html', title='Sign In', form = form)
     '''
     First step is to load the user from the db,then query
     the db with the log in username to find the user.
@@ -113,7 +113,7 @@ def user_profile(username):
 @auth.route('/edit_profile', methods=['GET','POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfile()
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
