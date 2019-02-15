@@ -1,4 +1,4 @@
 export SECRET_KEY='Flask WTF Secret Key'
-export MAIL_USERNAME=mudavadie@gmail.com
-export MAIL_PASSWORD=nandemuaddy
+export MAIL_USERNAME=<email address>
+export MAIL_PASSWORD=<password>
 python3.6 manage.py server
